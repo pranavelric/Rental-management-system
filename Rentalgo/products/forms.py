@@ -19,3 +19,12 @@ class ProdForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = ('prod_name','description','img1','img2','dprice','wprice','mprice','available_for_selling')
+        labels = {
+                    'prod_name': 'Product Name',
+                    'description': 'Description',
+                    'img1': 'Image 1',
+                    'img2': 'Image 2',
+                    'dprice': 'Rent per Day',
+                    'wprice': 'Rent per Week',
+                    'mprice': 'Rent per Month',
+        }
