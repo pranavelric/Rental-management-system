@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if error %}
+{{ error }}
+<br>
+<br>
+{% endif %}
+<h1>Post New Ad</h1>
+<!-- Figure out how to create the product form -->
+<form action="{% url 'create' %}" method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ prod_form.as_p }}
+  <input type="submit" class="btn btn-primary" value="Create">
+</form>
+{% endblock %}
