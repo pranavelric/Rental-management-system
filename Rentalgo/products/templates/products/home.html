@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+  {% if error %}
+    <div class="alert alert-danger alert-dismissible">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <strong>Sorry!</strong> {{ error }}
+    </div>
+  {% endif %}
   <div class="jumbotron">
     {% for product in products.all %}
       <div class="row pb-4 pt-3">
