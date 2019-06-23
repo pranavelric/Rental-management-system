@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+
+{% block content %}
+  {% if user.profile.kyc_verified == "n" %}
+    <div class="alert alert-info">
+      <strong>Info!</strong> If you have entered your kyc details please give 3 days time for us to approve it.
+    </div>
+  {% endif %}
+  <div class="jumbotron">
+    <h4>NAME: {{ user.first_name }} {{user.last_name }}</h4>
+    <h4>Email: {{ user.email }}</h4>
+    <h4>USERNAME: {{ user.username }}</h4>
+    {% if user.profile.kyc_verified == "n" %}
+      <h4>KYC not Verified</h4>
+      <h4><a href="{% url 'getKyc' %}">VERIFY</a></h4>
+    {% else %}
+      <h4>KYC Verified</h4>
+    {% endif %}
+  </div>
+
+{% endblock %}
