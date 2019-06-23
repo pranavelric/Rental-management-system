@@ -3,9 +3,9 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from django.contrib.auth.models import User
 from django.contrib import auth
-from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth import authenticate,login,logout, get_user
 from django.contrib.auth.decorators import login_required
-from .forms import LoginForm
+from .forms import LoginForm, KycForm
 from . import forms
 # Create your views here.
 
@@ -51,3 +51,18 @@ def user_logout(request):
     if request.method == 'POST':
         auth.logout(request)
         return redirect('home')
+
+@login_required
+def user_profile(request):
+    return render(request, 'accounts/profile.html',{'user':request.user})
+
+@login_required
+def getKyc(request):
+    if request.method == 'POST':
+        form = KycForm(request.POST, request.FILES, instance=request.user.profile)
+        if form.is_valid():
+            kyc = form.save()
+            kyc.save()
+            return render(request, 'accounts/profile.html',{'user':request.user})
+    else:
+        return render(request, 'accounts/verify.html', {'form': KycForm})
