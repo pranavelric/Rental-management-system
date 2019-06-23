@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django import forms
+from .models import KycModel
 
 class UserForm(UserCreationForm):
     class Meta:
@@ -28,3 +29,15 @@ class UserForm(UserCreationForm):
 class LoginForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput())
     password = forms.CharField(widget=forms.PasswordInput())
+
+class KycForm(forms.ModelForm):
+    class Meta:
+        model = KycModel
+        fields = ('p_address','curr_address','delivery_address','primary_contact','secondary_contact')
+        labels = {
+                    'p_address':'Permanent Address Proof (Voter ID / DL / Passport / Aadhaar)',
+                    'curr_address': 'Current Address (Rent agreement if not owner)',
+                    'primary_contact': 'Primary Contact Number',
+                    'secondary_contact': 'Secondary Contact Number',
+                    'delivery_address': 'Delivery Address',
+        }
