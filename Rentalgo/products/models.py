@@ -12,12 +12,13 @@ class Product(models.Model):
     mprice = models.PositiveIntegerField()
     img1 = models.ImageField(upload_to='images/',null=True)
     img2 = models.ImageField(upload_to='images/',null=True)
-    owner = models.ForeignKey(User,null=True, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User,null=True, on_delete=models.CASCADE, related_name='products')
     selling_choice = [
         ('y','YES'),
         ('n','NO'),
     ]
     available_for_selling = models.CharField(max_length=1, choices=selling_choice, default='n')
+    sprice = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.prod_name
