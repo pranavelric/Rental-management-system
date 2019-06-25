@@ -65,8 +65,10 @@ def getKyc(request):
             kyc = form.save()
             kyc.save()
             return render(request, 'accounts/profile.html',{'user':request.user})
-    else:
+    elif request.user.profile.kyc_verified == "n":
         return render(request, 'accounts/verify.html', {'form': KycForm})
+    else:
+        return redirect('profile')
 
 @login_required
 def delete_product(request, product_id):
@@ -74,5 +76,7 @@ def delete_product(request, product_id):
     if request.method == 'POST':
         product.delete()
         return redirect('profile')
-    else:
+    elif product.owner == request.user:
         return render(request, 'accounts/delete.html', {'product':product})
+    else:
+        return redirect('home')
