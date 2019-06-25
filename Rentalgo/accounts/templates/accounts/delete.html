@@ -1,17 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
 <div class="jumbotron">
+  <div class="alert alert-danger" role="alert">
+    Warning! This cannot be undone!
+  </div>
+  <h3>Do you really want to delete this ad?</h3>
+  <form method="POST">
+    {% csrf_token %}
+    <input type="submit" class="btn btn-danger" value="Delete">
+    <a href="{% url 'profile' %}">Cancel</a>
+  </form>
+  <br>
   <div class="row">
     <div class="col-2">
       <img src="{{ product.img1.url }}" class="img-fluid">
     </div>
     <div class="col-6">
       <h2>{{ product.prod_name }}</h2>
-    </div>
-    <div class="col-4">
-      <a href="#"><button class="btn btn-primary btn-lg btn-block" name="button">Rent</button></a>
     </div>
 
   </div>
@@ -26,7 +32,6 @@
       <h4>Per Month: Rs {{ product.mprice }}</h4>
       <br>
       {% if product.available_for_selling == "y" %}
-        <a href="#"><button class="btn btn-primary btn-lg btn-block" name="button">Buy</button></a>
         <h4>Selling Price: Rs {{ product.sprice }}</h4>
       {% endif %}
     </div>
