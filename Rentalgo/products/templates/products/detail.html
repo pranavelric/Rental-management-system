@@ -27,6 +27,7 @@
       <br>
       {% if product.available_for_selling == "y" %}
         <a href="#"><button class="btn btn-primary btn-lg btn-block" name="button">Buy</button></a>
+        <h4>Selling Price: Rs {{ product.sprice }}</h4>
       {% endif %}
     </div>
 
