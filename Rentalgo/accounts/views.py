@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from django.contrib.auth.models import User
@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate,login,logout, get_user
 from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, KycForm
 from . import forms
+from products.models import Product
 # Create your views here.
 
 class signup(CreateView):
@@ -54,7 +55,7 @@ def user_logout(request):
 
 @login_required
 def user_profile(request):
-    return render(request, 'accounts/profile.html',{'user':request.user})
+    return render(request, 'accounts/profile.html',{'user':request.user,'products':request.user.products.all()})
 
 @login_required
 def getKyc(request):
@@ -66,3 +67,12 @@ def getKyc(request):
             return render(request, 'accounts/profile.html',{'user':request.user})
     else:
         return render(request, 'accounts/verify.html', {'form': KycForm})
+
+@login_required
+def delete_product(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    if request.method == 'POST':
+        product.delete()
+        return redirect('profile')
+    else:
+        return render(request, 'accounts/delete.html', {'product':product})
