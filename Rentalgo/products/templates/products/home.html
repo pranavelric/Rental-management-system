@@ -17,7 +17,7 @@
           <h4>{{ product.prod_name }}</h4>
         </div>
         <div class="col-3">
-          <a href="{% url 'detail' product.id %}"><button class="btn btn-primary btn-lg btn-block" name="button">Rent</button></a>
+          <a href="{% url 'detail' product.id %}"><button class="btn btn-primary btn-lg btn-block" name="button">Rent or Buy</button></a>
           <br>
           <h5>Per Day: Rs {{ product.dprice }}</h5>
           <h5>Per Week: Rs {{ product.wprice }}</h5>
