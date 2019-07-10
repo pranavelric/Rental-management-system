@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product
+from .models import Product, Order, BuyOrder
 
 # Register your models here.
 def save_model(self, request, obj, form, change):
@@ -8,3 +8,5 @@ def save_model(self, request, obj, form, change):
     super().save_model(request, obj, form, change)
 
 admin.site.register(Product)
+admin.site.register(Order)
+admin.site.register(BuyOrder)

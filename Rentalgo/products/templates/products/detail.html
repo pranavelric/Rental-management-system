@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+{% if product.quantity == 0 %}
+  <div class="alert alert-danger">
+    <strong>Sorry!</strong> This item is out of stock
+  </div>
+{% endif %}
 <div class="jumbotron">
   <div class="row">
     <div class="col-2">
@@ -10,9 +14,11 @@
     <div class="col-6">
       <h2>{{ product.prod_name }}</h2>
     </div>
-    <div class="col-4">
-      <a href="#"><button class="btn btn-primary btn-lg btn-block" name="button">Rent</button></a>
-    </div>
+    {% if product.quantity > 0 %}
+      <div class="col-4">
+        <a href="{% url 'new_order' product.id %}"><button class="btn btn-primary btn-lg btn-block" name="button">Rent</button></a>
+      </div>
+    {% endif %}
 
   </div>
   <br>
@@ -26,8 +32,10 @@
       <h4>Per Month: Rs {{ product.mprice }}</h4>
       <br>
       {% if product.available_for_selling == "y" %}
-        <a href="#"><button class="btn btn-primary btn-lg btn-block" name="button">Buy</button></a>
-        <h4>Selling Price: Rs {{ product.sprice }}</h4>
+        {% if product.quantity > 0 %}
+          <a href="{% url 'buy_order' product.id %}"><button class="btn btn-primary btn-lg btn-block" name="button">Buy</button></a>
+          <h4>Selling Price: Rs {{ product.sprice }}</h4>
+        {% endif %}
       {% endif %}
     </div>
 

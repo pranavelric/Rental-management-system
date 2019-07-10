@@ -19,4 +19,8 @@ from . import views
 urlpatterns = [
     path('create/', views.create, name='create'),
     path('<int:product_id>', views.detail, name='detail'),
+    path('order/<int:product_id>', views.new_order, name='new_order'),
+    path('payment_status/', views.verify_payment, name='status'),
+    path('buy_payment_status/', views.buy_payment, name='buy_status'),
+    path('buyorder/<int:product_id>', views.buy_order, name='buy_order'),
 ]
