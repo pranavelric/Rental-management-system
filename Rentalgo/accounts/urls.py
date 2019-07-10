@@ -24,4 +24,5 @@ urlpatterns = [
     path('profile/',views.user_profile, name='profile'),
     path('getKyc/',views.getKyc, name='getKyc'),
     path('delete/<int:product_id>/', views.delete_product, name='delete'),
+    path('orders/',views.orders, name='orders'),
 ]
