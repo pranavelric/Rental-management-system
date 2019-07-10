@@ -80,3 +80,7 @@ def delete_product(request, product_id):
         return render(request, 'accounts/delete.html', {'product':product})
     else:
         return redirect('home')
+
+@login_required
+def orders(request):
+    return render(request, 'accounts/orders.html', {'user': request.user, 'orders': request.user.iorder.all(), 'borders': request.user.buyiorder.all()})
