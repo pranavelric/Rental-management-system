@@ -34,8 +34,8 @@
       {% if product.available_for_selling == "y" %}
         {% if product.quantity > 0 %}
           <a href="{% url 'buy_order' product.id %}"><button class="btn btn-primary btn-lg btn-block" name="button">Buy</button></a>
-          <h4>Selling Price: Rs {{ product.sprice }}</h4>
         {% endif %}
+        <h4>Selling Price: Rs {{ product.sprice }}</h4>
       {% endif %}
     </div>
 

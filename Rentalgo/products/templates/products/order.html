@@ -23,7 +23,7 @@
         <h5>Per Month: Rs {{ product.mprice }}</h5>
       </div>
     </div>
-    <div class="col-3">
+    <div class="container col-4">
       <form method="POST">
         {% csrf_token %}
         {% bootstrap_form order_form %}

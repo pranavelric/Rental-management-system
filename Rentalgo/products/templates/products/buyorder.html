@@ -24,7 +24,7 @@
         <h5>Selling Price: Rs {{ product.sprice }}</h5>
       </div>
     </div>
-    <div class="col-3">
+    <div class="container col-4">
       <form method="POST">
         {% csrf_token %}
         {% bootstrap_form buy_form %}
